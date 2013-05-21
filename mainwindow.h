@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QString>
-#include <QValidator>
+
 
 namespace Ui {
 class MainWindow;
@@ -18,12 +18,11 @@ public:
     ~MainWindow();
 
 public slots:
-    char calcularLetra (QString d);
-    char calcularDC (QString d);
+    void calcularLetra (QString d);
+    void calcularDC (QString d);
 
 private:
     Ui::MainWindow *ui;
-    QValidator *val_dni;
 
 };
 

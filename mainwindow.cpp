@@ -27,34 +27,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-char MainWindow::calcularLetra(QString d){
-   //val_dni->validate(ui->dni, d.toInt());
-   //qDebug () << d.toInt();
+void MainWindow::calcularLetra(QString d){
    ui->letra->setText(QString("TRWAGMYFPDXBNJZSQVHLCKE"[d.toInt()%23]));
 }
 
-char MainWindow::calcularDC (QString d) {
-    /*
-     // Todo correcto, calculamos el dígito de control
-    var numeroCuenta = f.entidad.value + "" + f.oficina.value + "--" + f.cuenta.value;
+void MainWindow::calcularDC (QString d) {
+    int valores[10] = {1, 2, 4, 8, 5, 10, 9, 7, 3, 6};
+    int control1 = 0, control2 = 0;
 
-    valores = new Array(1, 2, 4, 8, 5, 10, 9, 7, 3, 6);
-    var controlCS = 0;
-    var controlCC = 0;
-    for (i=0; i<=7; i++)
-    {controlCS += parseInt(numeroCuenta.charAt(i)) * valores[i+2];
-    }
-    controlCS = 11 - (controlCS % 11);
-    if (controlCS == 11) controlCS = 0;
-    else if (controlCS == 10) controlCS = 1;
+    QString s = ui->entidad->text() + ui->oficina->text();
 
-    for (i=10; i<=19; i++)
-    controlCC += parseInt(numeroCuenta.charAt(i)) * valores[i-10];
-    controlCC = 11 - (controlCC % 11);
-    if (controlCC == 11) controlCC = 0;
-    else if (controlCC == 10) controlCC = 1;
+    for (int i=0; i<=7; i++)
+        control1 +=  s[i].digitValue() * valores[i+2];
 
-    f.dc.value = controlCS + "" + controlCC;
-    */
+    control1 = 11 - (control1 % 11);
+    if (control1 == 11) control1 = 0;
+    else if (control1 == 10) control1 = 1;
 
+    for (int i=0; i<=9; i++)
+        control2 +=  ui->cuenta->text()[i].digitValue() * valores [i];
+
+    control2 = 11 - (control2 % 11);
+    if (control2 == 11) control2 = 0;
+    else if (control2 == 10) control2 = 1;
+
+    ui->dc->setNum(control1*10+control2);
 }
