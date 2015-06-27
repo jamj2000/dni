@@ -2,8 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QString>
-
 
 namespace Ui {
 class MainWindow;
@@ -12,18 +10,17 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 public slots:
-    void calcularLetra (QString d);
+    void calcularLetra(QString d);
     void calcularDC (QString d);
 
 private:
     Ui::MainWindow *ui;
-
 };
 
 #endif // MAINWINDOW_H

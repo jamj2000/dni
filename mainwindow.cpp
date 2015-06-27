@@ -1,15 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QtGui/QIntValidator>
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-   // val_dni = new QIntValidator(0, 99999999, ui->dni);
+
     connect (ui->dni, SIGNAL(textChanged(QString)), this, SLOT(calcularLetra(QString)) );
     ui->dni->setCursorPosition(0);
 
@@ -20,12 +17,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->oficina->setCursorPosition(0);
     ui->cuenta->setCursorPosition(0);
 
+
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
 
 void MainWindow::calcularLetra(QString d){
    ui->letra->setText(QString("TRWAGMYFPDXBNJZSQVHLCKE"[d.toInt()%23]));
